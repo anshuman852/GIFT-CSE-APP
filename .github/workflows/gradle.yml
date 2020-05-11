@@ -45,4 +45,4 @@ jobs:
     - name: Send Release apk
       env:
          bot_token: ${{ secrets.BOT_TOKEN }}
-      run: curl -v --silent -F caption="$(git log --decorate=no --oneline -1)  $(./catbox file $SIGNED_RELEASE_FILE)" -F chat_id="459034222" -F document=@"$SIGNED_RELEASE_FILE" https://api.telegram.org/bot$bot_token/sendDocument
+      run: curl -v --silent -F caption="$(git log --graph --pretty=format:'%s (%cr)' | grep "minutes")  $(./catbox file $SIGNED_RELEASE_FILE)" -F chat_id="459034222" -F document=@"$SIGNED_RELEASE_FILE" https://api.telegram.org/bot$bot_token/sendDocument

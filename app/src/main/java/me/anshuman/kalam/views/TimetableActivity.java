@@ -8,7 +8,6 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -21,14 +20,12 @@ import me.anshuman.kalam.R;
 import me.anshuman.kalam.adapters.SectionsPagerAdapter;
 
 public class TimetableActivity extends AppCompatActivity {
-    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timetable_fragment);
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         FragmentManager fragment;
         fragment = Objects.requireNonNull(getSupportFragmentManager());
         String ttjson=sharedPref.getString("ttJSON","");

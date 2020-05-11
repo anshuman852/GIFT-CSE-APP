@@ -30,10 +30,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 
@@ -157,35 +154,12 @@ public class CMSActivity extends AppCompatActivity {
                         assert manager != null;
                         manager.createNotificationChannel(channel);
                     }
-                    FirebaseMessaging.getInstance().subscribeToTopic("OK")
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    String msg = "Success " + cmsdata.getSection();
-                                    if (!task.isSuccessful()) {
-                                        msg = "Failed" + cmsdata.getSection();
-                                        //Sentry.capture(msg);
-                                    }
-                                    System.out.println(msg);
-
-                                }
-                            });
                     AttendanceAdapter attAdapter = new AttendanceAdapter(cmsdata.getAttendance(), CMSActivity.this, cmsdata.getSem());
                     aRecycler.setAdapter(attAdapter);
                     prefeditor.putString("section", cmsdata.getSection());
                     prefeditor.apply();
                     aRecycler.scrollToPosition(cmsdata.getAttendance().size() - 1);
 
-                    if (cmsdata.getSection().contains("CSE")) {
-                        resourcecard.setVisibility(View.VISIBLE);
-                        resourcebutton.setVisibility(View.VISIBLE);
-                        resourcebutton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                startActivity(new Intent(CMSActivity.this, ResourceActivity.class));
-                            }
-                        });
-                    }
 
 
                     if (cmsdata.getId().equals("1801298049")) {
@@ -215,17 +189,6 @@ public class CMSActivity extends AppCompatActivity {
                             }
                         });
                     }
-                    FirebaseMessaging.getInstance().subscribeToTopic(cmsdata.getSection())
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (!task.isSuccessful()) {
-                                        String msg = "Failed" + cmsdata.getSection();
-                                        //Sentry.capture(msg);
-                                    }
-
-                                }
-                            });
                     name.setText(cmsdata.getName());
                     phone.setText(cmsdata.getPhone());
                     Picasso.get().load(cmsdata.getPicurl()).into(imageView);
