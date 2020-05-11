@@ -31,7 +31,7 @@ jobs:
     - name: Send Debug Apk
       env:
         bot_token: ${{ secrets.BOT_TOKEN }}
-      run: curl -v --silent -F caption="$(git log --decorate=no --oneline -1)  $(./catbox file app/build/outputs/apk/debug/app-debug.apk)" -F chat_id="459034222" -F document=@"$PWD/app/build/outputs/apk/debug/app-debug.apk" https://api.telegram.org/bot$bot_token/sendDocument
+      run: curl -v --silent -F caption="$(git log --graph --pretty=format:'%s (%cr)' | grep "minutes")  $(./catbox file app/build/outputs/apk/debug/app-debug.apk)" -F chat_id="459034222" -F document=@"$PWD/app/build/outputs/apk/debug/app-debug.apk" https://api.telegram.org/bot$bot_token/sendDocument
     - name: Build Release Version
       run: ./gradlew build assembleRelease --stacktrace
     - name: Sign Release apk
