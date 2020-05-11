@@ -127,7 +127,7 @@ public class CMSActivity extends AppCompatActivity {
         aRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         final TextView phone = findViewById(R.id.tvphone);
         final Button cache = findViewById(R.id.cache);
-        String requesturl = "http://api.ansuman.xyz:12123/gift/cms?id=" + cmslogin + "&pass=" + cmspassword;
+        String requesturl = "http://35.224.114.140:5000/?id=" + cmslogin + "&pass=" + cmspassword;
         final ProgressDialog pd = new ProgressDialog(CMSActivity.this, R.style.DarkProgressBar);
         pd.setMessage("Please Wait");
         pd.show();
