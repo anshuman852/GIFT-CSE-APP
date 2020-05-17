@@ -35,7 +35,8 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceHolder> {
     @Override
     public void onBindViewHolder(@NonNull final AttendanceHolder holder, final int position) {
     holder.mpercent.setText(attendancelist.get(position));
-    holder.progressBar.setProgressWithAnimation(Float.parseFloat(attendancelist.get(position)), (long) 2500);
+    String percent=attendancelist.get(position).split("%")[0];
+    holder.progressBar.setProgressWithAnimation(Float.parseFloat(percent), (long) 2500);
     int sem1=((semester-attendancelist.size())+(position+1));
     holder.semnum.setText("Semester "+sem1);
     }
