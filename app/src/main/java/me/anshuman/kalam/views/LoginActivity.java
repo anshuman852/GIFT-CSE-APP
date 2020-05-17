@@ -30,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.Objects;
+import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 import me.anshuman.kalam.R;
@@ -50,7 +51,13 @@ public class LoginActivity extends AppCompatActivity {
             password = findViewById(R.id.password);
             Button loginbutton = findViewById(R.id.login);
 
-
+            String baseurl="https://api.ansuman.xyz/gift/cms";
+            Random randint=new Random();
+            int rand=randint.nextInt(10);
+            if(rand%2 ==0){
+                baseurl="https://gift-rest-flask.herokuapp.com";
+            }
+            final String finalBaseurl = baseurl;
             loginbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -81,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                             imm.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
                             progressBar.setVisibility(View.VISIBLE);
                             RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-                            String url = "http://35.224.114.140:5000/?id="+id.getText().toString()+"&pass="+password.getText().toString();
+                            String url = finalBaseurl +"/?id="+id.getText().toString()+"&pass="+password.getText().toString();
                             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                                     new Response.Listener<String>() {
                                         @Override

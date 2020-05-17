@@ -39,6 +39,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Objects;
+import java.util.Random;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -58,6 +59,12 @@ public class CMSActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cms);
+        String baseurl="https://api.ansuman.xyz/gift/cms";
+        Random randint=new Random();
+        int rand=randint.nextInt(10);
+        if(rand%2 ==0){
+        baseurl="https://gift-rest-flask.herokuapp.com";
+        }
         final String cmslogin, cmspassword;
         final RequestQueue queue = Volley.newRequestQueue(CMSActivity.this);
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -124,7 +131,7 @@ public class CMSActivity extends AppCompatActivity {
         aRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         final TextView phone = findViewById(R.id.tvphone);
         final Button cache = findViewById(R.id.cache);
-        String requesturl = "http://35.224.114.140:5000/?id=" + cmslogin + "&pass=" + cmspassword;
+        String requesturl = baseurl+"?id=" + cmslogin + "&pass=" + cmspassword;
         final ProgressDialog pd = new ProgressDialog(CMSActivity.this, R.style.DarkProgressBar);
         pd.setMessage("Please Wait");
         pd.show();
@@ -163,31 +170,12 @@ public class CMSActivity extends AppCompatActivity {
 
 
                     if (cmsdata.getId().equals("1801298049")) {
-                        cache.setVisibility(View.VISIBLE);
-                        cache.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                String url = "https://api.ansuman.codes/gift/cms/clear";
-                                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                                        new Response.Listener<String>() {
-                                            @Override
-                                            public void onResponse(String response) {
-                                                Toast toast = Toast.makeText(CMSActivity.this, response, Toast.LENGTH_LONG);
+
+                                                Toast toast = Toast.makeText(CMSActivity.this, "Welcome Anshuman", Toast.LENGTH_LONG);
                                                 View view2 = toast.getView();
                                                 view2.getBackground().setColorFilter(151515, PorterDuff.Mode.SRC_IN);
                                                 TextView text = view2.findViewById(android.R.id.message);
                                                 text.setTextColor(Color.WHITE);
-
-                                                toast.show();
-                                            }
-                                        }, new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                    }
-                                });
-                                queue.add(stringRequest);
-                            }
-                        });
                     }
                     name.setText(cmsdata.getName());
                     phone.setText(cmsdata.getPhone());
@@ -207,7 +195,7 @@ public class CMSActivity extends AppCompatActivity {
                             toast.show();
                         }
                     });
-                    String timetableurl = "https://api.ansuman.codes/gift/tt?link=" + cmsdata.getTimetable();
+                    String timetableurl = "https://api.ansuman.xyz/gift/tt?link=" + cmsdata.getTimetable();
                     final CacheRequest ttRequest = new CacheRequest(0, timetableurl, new Response.Listener<NetworkResponse>() {
                         @Override
                         public void onResponse(final NetworkResponse response) {

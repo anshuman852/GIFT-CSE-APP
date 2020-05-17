@@ -43,7 +43,7 @@ public class NoticeFragment extends Fragment {
         final RecyclerView recyclerView;
         recyclerView = view.findViewById(R.id.recycle);
         recyclerView.setHasFixedSize(true);
-        String url="https://api.ansuman.codes/bput/"+tab;
+        String url="https://api.ansuman.xyz/bput/"+tab;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         final CacheRequest noticerequest = new CacheRequest(0, url, new Response.Listener<NetworkResponse>() {
             @Override
