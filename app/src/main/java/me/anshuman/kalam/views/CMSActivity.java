@@ -59,7 +59,7 @@ public class CMSActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cms);
-        String baseurl="https://api.ansuman.xyz/gift/cms";
+        String baseurl="https://gift-rest-flask.herokuapp.com";
         Random randint=new Random();
         int rand=randint.nextInt(10);
         if(rand%2 ==0){
@@ -195,7 +195,7 @@ public class CMSActivity extends AppCompatActivity {
                             toast.show();
                         }
                     });
-                    String timetableurl = "https://api.ansuman.xyz/gift/tt?link=" + cmsdata.getTimetable();
+                    String timetableurl = "http://gift-tt-api.herokuapp.com/gift/tt?link=" + cmsdata.getTimetable();
                     final CacheRequest ttRequest = new CacheRequest(0, timetableurl, new Response.Listener<NetworkResponse>() {
                         @Override
                         public void onResponse(final NetworkResponse response) {

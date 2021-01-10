@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
             password = findViewById(R.id.password);
             Button loginbutton = findViewById(R.id.login);
 
-            String baseurl="https://api.ansuman.xyz/gift/cms";
+            String baseurl="https://gift-rest-flask.herokuapp.com";
             Random randint=new Random();
             int rand=randint.nextInt(10);
             if(rand%2 ==0){
